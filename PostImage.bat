@@ -1,20 +1,20 @@
 @ECHO OFF
-SET puppet=puppet-3.6.1.msi 
+SET puppet=puppet-3.6.1.msi
 SET fusion=fusioninventory-agent_windows-x86_2.3.8.exe
 SET domain=nas.local
 
-ECHO . 
+ECHO .
 ECHO Welcome to the post image/domain script info!
 ECHO .
-ECHO Before we start lets get some basic information about 
-ECHO this computer. Also keep in mind all responses *ARE* 
+ECHO Before we start lets get some basic information about
+ECHO this computer. Also keep in mind all responses *ARE*
 ECHO case sensitive.
 ECHO .
 
-SET /p computer= What's the name of this computer? 
+SET /p computer= What's the name of this computer?
 
 ECHO .
-SET /p mont= What's the monitor inventory tag? 
+SET /p mont= What's the monitor inventory tag?
 REG ADD "HKCC\NACSTech\Accessories\Monitors" /F /v Monitor1 /t reg_sz /d %mont%
 
 ECHO .
@@ -23,14 +23,14 @@ IF %teach% == Y GOTO Teach
 GOTO Install
 
 :Teach
-ECHO . 
+ECHO .
 ECHO **This is a teacher machine**
 ECHO .
 ECHO Lets get some basic information about the
 ECHO inventory in this room . Also keep in mind
 ECHO all responses *ARE* case sensitive.
 ECHO .
-SET /p projector= What's the projector inventory tag? 
+SET /p projector= What's the projector inventory tag?
 REG ADD "HKCC\NACSTech\Accessories\Projectors" /F /v Projector1 /t reg_sz /d %projector%
 ECHO .
 SET /p smart= What's the SMARTBoard inventory tag?
@@ -44,10 +44,10 @@ ECHO .
 ECHO Choose which one to install:
 ECHO .
 ECHO 	1. Fusion
-ECHO		2. Puppet 
+ECHO		2. Puppet
 ECHO		3. Done
 ECHO .
-SET /p ichoice= Which one do you want to install [1/2]? 
+SET /p ichoice= Which one do you want to install [1/2]?
 IF %ichoice% == 1 GOTO Fusion
 IF %ichoice% == 2 GOTO Puppet
 GOTO END
@@ -59,7 +59,7 @@ REM Start of the install process for Fusion Inventory
 ECHO .
 ECHO ###Before we install Fusion we need the Inventory Tag###
 ECHO .
-SET /p tag= Whats the inventory tag number? 
+SET /p tag= Whats the inventory tag number?
 ECHO .
 ECHO @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 ECHO .
@@ -81,7 +81,7 @@ ECHO ############################
 ECHO .
 ECHO !!!Installing puppet!!!
 ECHO .
-msiexec /qn /i %puppet% PUPPET_MASTER_SERVER=puppet.nas.local PUPPET_AGENT_NAME=%fqdn%
+msiexec /qn /i %puppet% PUPPET_MASTER_SERVER=puppet01.nas.local PUPPET_AGENT_NAME=%fqdn%
 ECHO .
 ECHO .
 ECHO ?!?!Installed Puppet?!?!
