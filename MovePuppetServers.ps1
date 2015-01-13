@@ -1,5 +1,8 @@
 Set-ExecutionPolicy unrestricted -Force
 
+# Set Environment variable in order to run puppet
+$env:PATH += ";C:\Program Files\Puppet Labs\Puppet\bin"	
+
 #
 # Get OS Version Major
 #
@@ -10,7 +13,7 @@ Set-ExecutionPolicy unrestricted -Force
 # client machines we don't need to test
 # the minor versions
 #
-$osversion = [environment]::OSVersion.Verions.Major
+$osversion = [environment]::OSVersion.Verion.Major
 $confdir = puppet agent --configprint confdir
 
 # Stop the puppet service to install the latest version
