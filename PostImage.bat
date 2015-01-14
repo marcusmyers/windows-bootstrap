@@ -20,6 +20,9 @@ ECHO .
 SET /p mont= What's the monitor inventory tag?
 REG ADD "HKLM\Software\NACSTech\Accessories\Monitors" /F /v Monitor1 /t reg_sz /d %mont%
 
+ECHO .
+SET /p tag= What's the computer inventory tag?
+REG ADD "HKLM\Software\NACSTech" /F /v InventoryTag /t reg_sz /d %tag%
 
 SET fqdn=%computer%.%domain%
 REM Start of the install process for Puppet
