@@ -15,9 +15,18 @@ $osversion = [environment]::OSVersion.Verions.Major
 # Upgrade Puppet to the most current that will work
 # with that OS
 if ($osversion -eq 5) {
+  # Windows XP
+  [Environment]::SetEnvironmentVariable("ChocolateyInstall", "C:\Chocolatey", "Machine")
+
+  # Install Chocolatey (or update to latest if already installed)
+  iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))
+
   # Install Puppet on Windows XP
   choco install puppet -Version 3.6.2
 } else {
+  # Install Chocolatey (or update to latest if already installed)
+  iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))
+
   # Install Puppet on Windows 7, 2008
   choco install puppet
 }
